@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Breakfast Menu</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 40px; }
+    img { max-width: 90%; height: auto; border: 1px solid #ccc; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Breakfast Menu</h1>
+  <p>Loading image...</p>
+  <div id="menu-container"></div>
+
+  <script>
+    fetch('https://gist.githubusercontent.com/yudhish252/1bf4607699a12b4ff9460e9b6e635071/raw/8488ecdba049b29b624a4d492bee90d03a29adb0/gistfile1.txt')
+      .then(res => res.json())
+      .then(data => {
+        document.querySelector('p').style.display = 'none';
+        const img = document.createElement('img');
+        img.src = data.image;
+        img.alt = data.title;
+        document.getElementById('menu-container').appendChild(img);
+      })
+      .catch(error => {
+        document.querySelector('p').innerText = 'Failed to load menu image.';
+        console.error(error);
+      });
+  </script>
+</body>
+</html>
